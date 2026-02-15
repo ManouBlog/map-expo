@@ -14,10 +14,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import Animated, {
-  useAnimatedStyle,
+//   useAnimatedStyle,
   useSharedValue,
-  interpolate,
-  Extrapolation,
+//   interpolate,
+//   Extrapolation,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheetContent from '../../components/BottomSheetContent';
@@ -100,7 +100,7 @@ export default function MapScreen() {
   const [selectedSalon, setSelectedSalon] = useState<typeof MOCK_SALONS[0] | null>(null);
 
   const animatedPosition = useSharedValue(0);
-  const snapPoints = useMemo(() => ['25%', '50%', '70%'], []);
+  const snapPoints = useMemo(() => ['20%', '50%', '70%'], []);
 
   useEffect(() => {
     (async () => {
@@ -158,6 +158,43 @@ export default function MapScreen() {
 //       paddingBottom,
 //     };
 //   });
+const roadsOnlyStyle = [
+  // Tout masquer
+  {
+    featureType: "all",
+    elementType: "labels",
+    stylers: [{ visibility: "off" }],
+  },
+  {
+    featureType: "poi",
+    stylers: [{ visibility: "off" }],
+  },
+  {
+    featureType: "transit",
+    stylers: [{ visibility: "off" }],
+  },
+  {
+    featureType: "administrative",
+    stylers: [{ visibility: "off" }],
+  },
+  {
+    featureType: "landscape",
+    stylers: [{ visibility: "off" }],
+  },
+
+  // Garder uniquement les routes
+  {
+    featureType: "road",
+    stylers: [{ visibility: "on" }],
+  },
+  {
+    featureType: "road",
+    elementType: "geometry",
+    stylers: [{ visibility: "on" }],
+  },
+];
+
+
 
   return (
     <>
@@ -169,14 +206,10 @@ export default function MapScreen() {
           style={styles.map}
           provider={PROVIDER_GOOGLE}
           initialRegion={ABIDJAN_REGION}
-          showsPointsOfInterest={false}
-          showsBuildings={false}
-          loadingEnabled
-          showsTraffic={false}
-          showsIndoors={false}
+          loadingEnabled   
           showsUserLocation
           showsMyLocationButton={false}
-          customMapStyle={isDark ? darkMapStyle : []}
+      customMapStyle={roadsOnlyStyle}
         >
           {MOCK_SALONS.map((salon) => (
             <Marker
@@ -229,6 +262,7 @@ export default function MapScreen() {
         index={0}
         snapPoints={snapPoints}
         enablePanDownToClose
+        
         backdropComponent={renderBackdrop}
         backgroundStyle={[
           styles.bottomSheetBackground,
