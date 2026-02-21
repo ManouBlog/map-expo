@@ -14,7 +14,7 @@ export default function ProfileScreen() {
       <View style={styles.content}>
         <Text style={[styles.title, isDark && styles.titleDark]}>Profile</Text>
         <Text style={[styles.subtitle, isDark && styles.subtitleDark]}>
-          Fonctionnalité à venir
+          Fonctionnalité
         </Text>
       </View>
     </SafeAreaView>

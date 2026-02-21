@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router';
 import { useColorScheme } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+export { ErrorBoundary } from 'expo-router';
 
 export default function TabsLayout() {
   const colorScheme = useColorScheme();
@@ -22,7 +23,6 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: 'Map',
-          
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="map" size={size} color={color} />
           ),

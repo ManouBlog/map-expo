@@ -1,6 +1,7 @@
 import { Stack } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useColorScheme } from 'react-native';
+export { ErrorBoundary } from 'expo-router';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
